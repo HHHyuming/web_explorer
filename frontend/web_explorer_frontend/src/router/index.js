@@ -11,6 +11,10 @@ let routes = [
     component: resolve => require(['@/views/sidebar/SideBar'], resolve),
     children:[
       {
+        path: '/',
+        redirect: '/explorer',
+      },
+      {
         path:'explorer',
         name: 'Explorer',
         component: resolve => require(['@/views/master/Explorer'] ,resolve)

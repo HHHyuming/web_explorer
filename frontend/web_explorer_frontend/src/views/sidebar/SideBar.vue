@@ -69,7 +69,7 @@
   }
 
   .el-main {
-    border: 1px solid red;
+    border: 1px solid blueviolet;
   }
 
 </style>
