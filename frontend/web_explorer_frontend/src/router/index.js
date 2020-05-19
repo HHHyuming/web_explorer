@@ -7,6 +7,11 @@ Vue.use(Router)
 
 let routes = [
   {
+    path: '/login',
+    name: 'login',
+    component: resolve => require(['@/views/login/Login'], resolve)
+  },
+  {
     path: '/',
     component: resolve => require(['@/views/sidebar/SideBar'], resolve),
     children:[
