@@ -20,6 +20,8 @@ def user_register_fun():
     register_user_name = request.form.get('user_name')
     register_user_password = request.form.get('user_password')
     permission_id = request.form.get('admin')
+    if not permission_id:
+        permission_id = 2
 
     def user_is_exists():
         sql = 'select user_name from user_t where user_name=%s'
@@ -28,26 +30,22 @@ def user_register_fun():
             result = db.cursor.fetchall()
         return True if result else False
 
-    def user_data_to_db():
-        sql = 'insert into user_t(`user_name`, `user_password`,`permission_id`, `space_id`) ' \
-              'values (%s,%s,%s,%s)'
-        
+    def user_register_init(user_name, user_password, permission):
+        sql = 'insert into user_t(`user_name`, `user_password`,`permission`) ' \
+              'values (%s,%s,%s)'
+
+        with explorer_db as db:
+            try:
+                db.cursor.execute(sql, (user_name, user_password, permission))
+            except Exception as e:
+                # 错误回滚
+                db.conn.rollback()
+
     def flow_line():
         """
         流水线
         :return:
         """
-        with explorer_db as db:
-            try:
-                pass
-            except Exception as e:
-                "log"
-                db.conn.rollback()
-
-
-        pass
-    if not permission_id:
-        permission_id = 2
 
     if user_is_exists():
         msg = '该用户已存在,请重试'

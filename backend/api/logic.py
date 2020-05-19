@@ -32,7 +32,7 @@ def gain_root_level_info(user_name):
             file_name, file_type = current_test_path.rsplit('.')
             size = os.stat(current_test_path).st_size
 
-            item = {'name': file_name, 'file_type': file_type, 'size': size, 'create_time': create_time,
+            item = {'name': file, 'file_type': file_type, 'size': size, 'create_time': create_time,
                     'update_time': update_time, 'author': user_name, 'desc': ''}
             data_list.append(item)
         if os.path.isdir(current_test_path):
@@ -81,4 +81,11 @@ if __name__ == '__main__':
     # print(os.path.getctime(r'D:\code\web_explorer\backend\api\login.py'))
     # print(os.path.isdir(r'D:\code\web_explorer\backend\api'))
     # print(os.path.isfile(r'D:\code\web_explorer\backend\api\explorer.py'))
+
+    # is ok
+    size_of = gain_current_level_file_info(r'D:\code\web_explorer\backend', {'name':'api'})
+    print(round(size_of/1024, 2))
+
+    #
+    print(gain_root_level_info('yuming'))
     pass
