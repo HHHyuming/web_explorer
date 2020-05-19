@@ -1,8 +1,10 @@
-from app import create_app
+import platform
+from factory import create_app
 
-application = create_app()
 
+if platform.system() == 'Windows':
+    application = create_app(env='development')
+    application.run()
 
-if __name__ == '__main__':
-
+if platform.system() == 'Linux':
     pass
