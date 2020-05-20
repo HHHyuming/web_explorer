@@ -29,8 +29,8 @@ def user_register_fun():
         return True if result else False
 
     def user_data_to_db():
-        sql = 'insert into user_t(`user_name`, `user_password`,`permission_id`, `space_id`) ' \
-              'values (%s,%s,%s,%s)'
+        sql = 'insert into user_t(`user_name`, `user_password`,`permission_id`, ) ' \
+              'values (%s,%s,%s)'
         
     def flow_line():
         """
@@ -39,7 +39,9 @@ def user_register_fun():
         """
         with explorer_db as db:
             try:
-                pass
+
+                logic.init_user_data(register_user_name)
+
             except Exception as e:
                 "log"
                 db.conn.rollback()
