@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 
-Vue.use(Router)
+Vue.use(Router);
 
 
 let routes = [
@@ -33,10 +33,26 @@ let routes = [
       }
     ]
   }
-]
+];
 
-
-
-export default new Router({
+const router = new Router({
   routes
-})
+});
+
+router.beforeEach((to, from ,next) => {
+  window.localStorage.getItem("user_token");
+  if (to.path.indexOf("explorer") >= 0){
+    if (window.localStorage.getItem("user_token")){
+      next()
+    }else{
+      next('login');
+
+    }
+  }else{
+
+    next()
+
+  }
+});
+
+export default router

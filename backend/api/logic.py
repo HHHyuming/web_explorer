@@ -1,6 +1,7 @@
 import os
-
 from flask import request
+
+
 from config import USER_HOME_DIR
 
 
@@ -10,6 +11,7 @@ def init_user_data(user_name):
         return False
     os.mkdir(user_current_dir)
     return
+
 
 def gain_root_level_info(user_name):
     """
@@ -32,13 +34,15 @@ def gain_root_level_info(user_name):
             file_name, file_type = current_test_path.rsplit('.')
             size = os.stat(current_test_path).st_size
 
-            item = {'name': file_name, 'file_type': file_type, 'size': size, 'create_time': create_time,
-                    'update_time': update_time, 'author': user_name, 'desc': ''}
+            item = {'name': file, 'file_type': file_type, 'size': size, 'create_time': create_time,
+                    'update_time': update_time, 'author': user_name, 'desc': '', 'level': 1,
+                    'path': user_name + '/' + file}
             data_list.append(item)
         if os.path.isdir(current_test_path):
             item = {'name': file, 'file_type': None, 'size': None, 'create_time': create_time,
-                    'update_time': update_time, 'author': user_name, 'desc': ''}
-            size = gain_current_level_file_info(current_test_path, item)
+                    'update_time': update_time, 'author': user_name, 'desc': '', 'level': 1,
+                    'path': user_name + '/' + file}
+            size = gain_current_level_file_info(user_current_dir, item)
             item['size'] = size
             dir_list.append(item)
     return dir_list, data_list
@@ -49,7 +53,6 @@ def gain_current_level_file_info(file_path, dir_item):
     file = dir_item['name']
     real_path = os.path.join(file_path, file)
     for root_dir, current_dir, file_list in os.walk(real_path):
-
         for real_file in file_list:
             size += os.stat(os.path.join(root_dir, real_file)).st_size
     return size
@@ -58,9 +61,9 @@ def gain_current_level_file_info(file_path, dir_item):
 def create_file(file_path):
     pass
 
+
 def create_dir(dir_path):
     pass
-
 
 
 if __name__ == '__main__':
@@ -81,4 +84,12 @@ if __name__ == '__main__':
     # print(os.path.getctime(r'D:\code\web_explorer\backend\api\login.py'))
     # print(os.path.isdir(r'D:\code\web_explorer\backend\api'))
     # print(os.path.isfile(r'D:\code\web_explorer\backend\api\explorer.py'))
-    pass
+
+    # is ok
+    # size_of = gain_current_level_file_info(r'D:\code\web_explorer\backend', {'name':'api'})
+    # print(round(size_of/1024, 2))
+
+    #
+    d1, d2 = gain_root_level_info('yuming')
+    print(d1)
+    print(d2)

@@ -115,7 +115,8 @@
       data(){
         return {
           edit_disabled: true,
-
+          value:null,
+          options:null
         }
       },
       methods:{

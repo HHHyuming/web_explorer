@@ -4,11 +4,9 @@ CREATE TABLE `user_t` (
 `user_password` varchar(255) NULL,
 `create_time` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
 `update_time` timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
-`perimssion_id` int NULL,
-`space_id` int NULL,
+`permission` varchar(255) NULL,
 PRIMARY KEY (`id`) ,
-UNIQUE INDEX `uniq_user_name` (`user_name` ASC),
-UNIQUE INDEX `uni_space_id` (`space_id` ASC)
+UNIQUE INDEX `uniq_user_name` (`user_name` ASC)
 );
 CREATE TABLE `space_t` (
 `id` int(11) NOT NULL auto_increment,

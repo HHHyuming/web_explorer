@@ -1,4 +1,5 @@
 <template>
+
   <div  style="background: white;height: 100vh">
     <el-row  >
       <el-col :offset="5" :span="15" style="margin-top: 20%; " >
@@ -71,10 +72,14 @@
         user_register_action(){
 
         }
+
       }
     }
+
 </script>
 
 <style scoped>
-
+ *{
+   background-color: black;
+ }
 </style>
