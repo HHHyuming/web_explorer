@@ -9,7 +9,7 @@ USER_HOME_DIR = r'D:\code\web_explorer\backend\data'
 NormalDBConfig = {
     'explorer': {
         'db_name': 'explorer',
-        'db_host': '127.0.0.1',
+        'db_host': '39.106.217.14',
         'db_port': 3306,
         'db_user': 'root',
         'db_password': 'root',
@@ -20,6 +20,9 @@ NormalDBConfig = {
 db_connection_list = {
     'explorer': db_handler.MysqlPool(NormalDBConfig['explorer'])
 }
+# JWT 配置
+DEFAULT_EXP_TIME = 24
+SECRET_KEY = 'abcdefg'
 
 
 # 日志配置
@@ -54,3 +57,9 @@ config_map = {
     'production': ProductConfig,
     'development': DevConfig,
 }
+
+
+if __name__ == '__main__':
+    a = b'eyJleHAiOjE1OTAwNjIzNTR9'
+    import base64
+    print(base64.urlsafe_b64decode(a))

@@ -1,0 +1,25 @@
+2020-05-21 10:05:36 ----- login.py ----- [line:67] ----- ERROR ----- ÓÃ»§×¢²áÊ§°Ü traceback---: Traceback (most recent call last):
+  File "D:\code\web_explorer\backend\api\login.py", line 48, in user_register_init
+    db.cursor.execute(sql, (user_name, user_password, permission,create_time, update_time))
+  File "D:\python3_virtualenv\file_service\lib\site-packages\DBUtils\SteadyDB.py", line 686, in tough_method
+    raise error  # re-raise the original error again
+  File "D:\python3_virtualenv\file_service\lib\site-packages\DBUtils\SteadyDB.py", line 605, in tough_method
+    result = method(*args, **kwargs)  # try to execute
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\cursors.py", line 170, in execute
+    result = self._query(query)
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\cursors.py", line 328, in _query
+    conn.query(q)
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\connections.py", line 517, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\connections.py", line 732, in _read_query_result
+    result.read()
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\connections.py", line 1075, in read
+    first_packet = self.connection._read_packet()
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\connections.py", line 684, in _read_packet
+    packet.check_error()
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\protocol.py", line 220, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\python3_virtualenv\file_service\lib\site-packages\pymysql\err.py", line 109, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.InternalError: (1054, "Unknown column 'permission' in 'field list'")
+

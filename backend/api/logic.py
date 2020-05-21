@@ -9,7 +9,8 @@ def init_user_data(user_name):
     user_current_dir = os.path.join(USER_HOME_DIR, user_name)
     if os.path.exists(user_current_dir):
         return False
-    os.mkdir(user_current_dir)
+    if not os.path.exists(user_current_dir):
+        os.mkdir(user_current_dir)
     return
 
 
@@ -24,7 +25,6 @@ def gain_root_level_info(user_name):
     data_list = []
     dir_list = []
     user_current_dir = os.path.join(USER_HOME_DIR, user_name)
-    # user_current_dir = r'D:\code\web_explorer\backend'
     file_list = os.listdir(user_current_dir)
     for file in file_list:
         current_test_path = os.path.join(user_current_dir, file)
@@ -48,9 +48,9 @@ def gain_root_level_info(user_name):
     return dir_list, data_list
 
 
-def gain_current_level_file_info(file_path, dir_item):
+def gain_current_level_file_info(file_path, file):
     size = 0
-    file = dir_item['name']
+
     real_path = os.path.join(file_path, file)
     for root_dir, current_dir, file_list in os.walk(real_path):
         for real_file in file_list:
@@ -58,12 +58,76 @@ def gain_current_level_file_info(file_path, dir_item):
     return size
 
 
-def create_file(file_path):
-    pass
+def create_dir(file_path, file_name):
+
+    path = os.path.join(file_path, file_name)
+    if not os.path.exists(path):
+        os.mkdir(path)
+        return True
 
 
-def create_dir(dir_path):
-    pass
+def get_cascade_path(root_file_path):
+    """
+    返回符合element ui cascade 级联数据
+    :param root_file_path:
+    :return:
+    """
+
+    class Node:
+        """
+        node --> list dir
+        """
+        def __init__(self, data):
+            self.data = data
+            self.next = None
+            self.tail = None
+
+        def __str__(self):
+            return str(self.data)
+
+    dir_item_stack = [Node({'name': os.path.basename(root_file_path), 'path': root_file_path})]
+    root_node = Node(data=[])
+    root_node.next = dir_item_stack[0]
+    root_node.tail = dir_item_stack[0]
+    while dir_item_stack:
+        calc_dir = dir_item_stack.pop()
+        calc_file_path = calc_dir.data['path']
+        dir_list = os.listdir(calc_file_path)
+        temp_list = []
+        for file in dir_list:
+            current_path = os.path.join(calc_file_path, file)
+            # 数据链路
+            x = Node({'name': file, 'path': current_path})
+            dir_item_stack.append(x)
+            temp_list.append(x)
+        else:
+            pub = Node(data=[*temp_list])
+            calc_dir.next = pub
+            root_node.tail = pub
+            temp_list.clear()
+
+    data_stack = [root_node.next]
+
+    while data_stack:
+        master_node = data_stack.pop()
+
+        if master_node.next or master_node.data:
+
+            if isinstance(master_node.next.data, list):
+                master_node.data['children']=[]
+
+                for node in master_node.next.data:
+                    try:
+                        master_node.data['children'].append(node.data)
+                    except Exception as e:
+                        master_node.children.append(node.data)
+                        pass
+                    data_stack.append(node)
+
+    return root_node.next
+
+
+
 
 
 if __name__ == '__main__':
@@ -90,6 +154,7 @@ if __name__ == '__main__':
     # print(round(size_of/1024, 2))
 
     #
-    d1, d2 = gain_root_level_info('yuming')
-    print(d1)
-    print(d2)
+    # d1, d2 = gain_root_level_info('yuming')
+    # print(d1)
+    # print(d2)
+    get_cascade_path(r'D:\code\web_explorer\backend\data\admin')
