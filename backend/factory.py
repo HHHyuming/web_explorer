@@ -14,9 +14,10 @@ def create_app(env):
     if env == 'production':
         app.config.from_object(config.config_map['production'])
 
-    # 跨域配置
-    CORS(app)
     # load api
     app.register_blueprint(blue_user_action)
     app.register_blueprint(blue_explorer)
+    # 跨域配置
+
+    CORS(app)
     return app

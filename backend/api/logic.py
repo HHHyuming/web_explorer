@@ -68,8 +68,9 @@ def create_dir(file_path, file_name):
 
 def get_cascade_path(root_file_path):
     """
+
     返回符合element ui cascade 级联数据
-    :param root_file_path:
+    :param root_file_path: 'xxx/xxxx/xxx/user_name'
     :return:
     """
 
@@ -86,7 +87,7 @@ def get_cascade_path(root_file_path):
             return str(self.data)
 
     dir_item_stack = [Node({'name': os.path.basename(root_file_path), 'path': root_file_path})]
-    root_node = Node(data=[])
+    root_node = Node(data='')
     root_node.next = dir_item_stack[0]
     root_node.tail = dir_item_stack[0]
     while dir_item_stack:
@@ -101,7 +102,10 @@ def get_cascade_path(root_file_path):
             dir_item_stack.append(x)
             temp_list.append(x)
         else:
-            pub = Node(data=[*temp_list])
+            if temp_list:
+                pub = Node(data=[*temp_list])
+            else:
+                pub = Node(data='')
             calc_dir.next = pub
             root_node.tail = pub
             temp_list.clear()
@@ -114,16 +118,17 @@ def get_cascade_path(root_file_path):
         if master_node.next or master_node.data:
 
             if isinstance(master_node.next.data, list):
-                master_node.data['children']=[]
-
-                for node in master_node.next.data:
-                    try:
+                if bool(master_node.next):
+                    # print(master_node.data, master_node.next, type(master_node.next))
+                    # print(master_node.data)
+                    master_node.data['children'] = []
+                    for node in master_node.next.data:
+                        v = node.data.pop('name')
+                        node.data.pop('path')
+                        node.data['label'] = v
+                        node.data['value'] = v
                         master_node.data['children'].append(node.data)
-                    except Exception as e:
-                        master_node.children.append(node.data)
-                        pass
-                    data_stack.append(node)
-
+                        data_stack.append(node)
     return root_node.next
 
 
@@ -157,4 +162,5 @@ if __name__ == '__main__':
     # d1, d2 = gain_root_level_info('yuming')
     # print(d1)
     # print(d2)
-    get_cascade_path(r'D:\code\web_explorer\backend\data\admin')
+    res = get_cascade_path(r'D:\code\web_explorer\backend\data\admin')
+    print(res)

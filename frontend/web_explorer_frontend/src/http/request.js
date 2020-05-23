@@ -6,6 +6,19 @@ const req_obj = axios.create({
   // timeout: 5000
 })
 
+req_obj.interceptors.request.use(config =>{
+  let token = window.sessionStorage.getItem('token')
+  if (token){
+    config.headers.Authorization = token
+    return config
+  }
+
+}, error => {
+  return Promise.reject(error)
+})
+
+
+
 export function request(config) {
 
   return req_obj(config)

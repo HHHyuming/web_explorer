@@ -10,5 +10,5 @@ class MyResponse:
     @property
     def response_data(self):
         res = {'code': self.code, 'data': self.data, 'msg': self.msg}
-        print(res)
+        # print(res)
         return json.dumps(res)

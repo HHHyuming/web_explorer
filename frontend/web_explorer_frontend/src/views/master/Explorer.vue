@@ -32,10 +32,10 @@
         <div class="block" >
 <!--          <span class="demonstration">快速定位文件夹</span>-->
           <el-cascader
-            v-model="value"
-            :options="options"
+            v-model="filter_value"
+            :options="this.$store.state.cascade_dir"
             :props="{ expandTrigger: 'hover' }"
-
+            @change="filter_select_handler"
             style="width: 350px"
           ></el-cascader>
         </div>
@@ -102,15 +102,15 @@
 
         <div class="block">
           <el-cascader
-            v-model="choice_path"
-            :options="path_options"
+            v-model="add_file_value"
+            :options="this.$store.state.cascade_dir"
             @change="handleChangePath"></el-cascader>
         </div>
 
 
       </el-form-item>
 
-      <el-form-item label="文件夹名称" required :rules="[{require:true}]">
+      <el-form-item label="文件夹名称" required :rules="[{require:true,message:'此项必填'}]">
         <el-input v-model="add_file_form_data.file_name"></el-input>
       </el-form-item>
 
@@ -169,11 +169,15 @@
 </template>
 
 <script>
-    export default {
+  import {get_usr_dir_cascade, add_file} from "@/http/explorer";
+
+  export default {
       name: "explorer",
       data(){
         return {
-          choice_path:'',
+          filter_select_value:[],
+          add_file_value:[],
+          filter_value:[],
           up_load_form_data:{},
           up_load_file_dialog: false,
           loading:false,
@@ -236,19 +240,42 @@
           console.log(val)
           this.multipleSelection = val;
         },
-
-        submit_add_file(){
-          console.log(this.filterText)
+        filter_select_handler(val){
+          this.filter_select_value = val;
         },
         handleChangePath(cascade_path){
           console.log(cascade_path)
 
-        }
+        },
+        submit_add_file() {
+        //  新增文件夹
+          this.add_file_form_data.file_path = this.add_file_value
+          const file_path = this.add_file_form_data.file_path
+          const file_name = this.add_file_form_data.file_name
+          const desc = this.add_file_form_data.desc
+          add_file(file_path, file_name, desc).then( response =>{
+
+          }).catch( error =>{
+            console.log(error)
+          })
+        },
+        get_cascade_data(){
+          const user_name = window.sessionStorage.getItem('user_name')
+          get_usr_dir_cascade(user_name).then( result => {
+            const data = result.data
+
+            this.$store.commit('change_cascade', data.data)
+          }).catch( error => {
+            console.log(error)
+          })
+        },
       },
 
       mounted() {
-      //  获取首页数据
 
+      //  获取首页数据
+      //  获取级联目录
+        this.get_cascade_data()
         // 过滤搜索
 
       },

@@ -80,6 +80,7 @@
             let token = data.data.token
             console.log('设置')
             window.sessionStorage.setItem('token',token)
+            window.sessionStorage.setItem('user_name', user_name)
             console.log('跳')
             this.$router.replace({name: 'Explorer'})
           }).catch( error =>{
