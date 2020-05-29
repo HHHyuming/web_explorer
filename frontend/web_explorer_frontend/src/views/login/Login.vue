@@ -20,7 +20,7 @@
             </el-tab-pane>
 
             <el-tab-pane label="立即注册" name="register_tag">
-              <el-form-item label="邮箱账号" prop="account">
+              <el-form-item label="请输入用户名" prop="account">
                 <el-input v-model="form_data.register_form_data.account"></el-input>
               </el-form-item>
               <el-form-item label="请输入密码" prop="password">
@@ -103,9 +103,16 @@
           }
           // 注册请求
           user_register(user_name, user_password, sec_password).then((response) => {
-            console.log(response)
+            let result = response.data
+            if(result.code === 200){
+              let token = result.data.token
+              window.sessionStorage.setItem('token', token)
+              window.sessionStorage.setItem('user_name', user_name)
+              this.$router.push('explorer')
+            }
           }).catch((reason => {
-            console.log(reason)
+            console.log(reason.data.msg)
+            this.$message({type:'warning', message: reason.data.msg})
           }))
         },
       },

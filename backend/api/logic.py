@@ -1,4 +1,5 @@
 import os
+import shutil
 from flask import request
 
 
@@ -6,6 +7,11 @@ from config import USER_HOME_DIR
 
 
 def init_user_data(user_name):
+    """
+    用户注册 初始化
+    :param user_name:
+    :return:
+    """
     user_current_dir = os.path.join(USER_HOME_DIR, user_name)
     if os.path.exists(user_current_dir):
         return False
@@ -16,6 +22,7 @@ def init_user_data(user_name):
 
 def gain_root_level_info(user_name):
     """
+    获取用户家目录下的所有数据
     数据格式形如 {'dir_name':'xxx',level_size:'xxx','root_dir':none}
                 {'dir_name':'xxx2',level_size:'xxx','root_dir':xxx}
                 {'dir_name':root,dir_list:{'dir_name':'root2',size:123,dir_list:{}},size:123}
@@ -49,6 +56,12 @@ def gain_root_level_info(user_name):
 
 
 def gain_current_level_file_info(file_path, file):
+    """
+    获取当前路径的目录大小
+    :param file_path:
+    :param file:
+    :return:
+    """
     size = 0
 
     real_path = os.path.join(file_path, file)
@@ -59,11 +72,32 @@ def gain_current_level_file_info(file_path, file):
 
 
 def create_dir(file_path, file_name):
-
+    """
+    创建目录
+    :param file_path:
+    :param file_name:
+    :return:
+    """
     path = os.path.join(file_path, file_name)
+
     if not os.path.exists(path):
         os.mkdir(path)
         return True
+
+def create_file(file_path, data):
+    pass
+
+
+# 删除文件
+def delete_file(file_path, file_type):
+    if not os.path.exists(file_path):
+        return
+    if file_type == 'dir':
+        print(file_path)
+        shutil.rmtree(file_path)
+    else:
+        os.remove(file_path)
+    return True
 
 
 def get_cascade_path(root_file_path):
@@ -93,6 +127,8 @@ def get_cascade_path(root_file_path):
     while dir_item_stack:
         calc_dir = dir_item_stack.pop()
         calc_file_path = calc_dir.data['path']
+        if not os.path.isdir(calc_file_path):
+            continue
         dir_list = os.listdir(calc_file_path)
         temp_list = []
         for file in dir_list:
@@ -116,19 +152,21 @@ def get_cascade_path(root_file_path):
         master_node = data_stack.pop()
 
         if master_node.next or master_node.data:
-
-            if isinstance(master_node.next.data, list):
-                if bool(master_node.next):
-                    # print(master_node.data, master_node.next, type(master_node.next))
-                    # print(master_node.data)
-                    master_node.data['children'] = []
-                    for node in master_node.next.data:
-                        v = node.data.pop('name')
-                        node.data.pop('path')
-                        node.data['label'] = v
-                        node.data['value'] = v
-                        master_node.data['children'].append(node.data)
-                        data_stack.append(node)
+            try:
+                if isinstance(master_node.next.data, list):
+                    if bool(master_node.next):
+                        # print(master_node.data, master_node.next, type(master_node.next))
+                        # print(master_node.data)
+                        master_node.data['children'] = []
+                        for node in master_node.next.data:
+                            v = node.data.pop('name')
+                            node.data.pop('path')
+                            node.data['label'] = v
+                            node.data['value'] = v
+                            master_node.data['children'].append(node.data)
+                            data_stack.append(node)
+            except Exception:
+                continue
     return root_node.next
 
 
@@ -136,31 +174,4 @@ def get_cascade_path(root_file_path):
 
 
 if __name__ == '__main__':
-    # import time
-    # print(time.strftime("%Y-%m-%d %X",time.localtime(os.stat(r'D:\code\web_explorer\backend').st_size)))
-    # print(os.stat(r'D:\code\web_explorer\backend\api\explorer.py').st_size)
-    # for root_dir, current_dir, file_list in os.walk(r'D:\code\web_explorer\backend'):
-    #     if not ('.idea' in root_dir or '__pycache__' in root_dir):
-    #         print(root_dir)
-    #         print('-----------')
-    #         print(list(filter(lambda x: x not in '.idea' and x not in '__pycache__', current_dir)))
-    #         print('------------')
-    #         print(file_list)
-    # print(os.stat(r'D:\code\web_explorer\backend\api').st_ctime)
-    # print(os.path.getctime(r'D:\code\web_explorer\backend\api'))
-    # print(os.path.getctime(r'D:\code\web_explorer\backend\api\explorer.py'))
-    # print(os.path.getctime(r'D:\code\web_explorer\backend\api\logic.py'))
-    # print(os.path.getctime(r'D:\code\web_explorer\backend\api\login.py'))
-    # print(os.path.isdir(r'D:\code\web_explorer\backend\api'))
-    # print(os.path.isfile(r'D:\code\web_explorer\backend\api\explorer.py'))
-
-    # is ok
-    # size_of = gain_current_level_file_info(r'D:\code\web_explorer\backend', {'name':'api'})
-    # print(round(size_of/1024, 2))
-
-    #
-    # d1, d2 = gain_root_level_info('yuming')
-    # print(d1)
-    # print(d2)
-    res = get_cascade_path(r'D:\code\web_explorer\backend\data\admin')
-    print(res)
+    pass

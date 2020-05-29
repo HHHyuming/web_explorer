@@ -12,7 +12,7 @@ req_obj.interceptors.request.use(config =>{
     config.headers.Authorization = token
     return config
   }
-
+  return config
 }, error => {
   return Promise.reject(error)
 })

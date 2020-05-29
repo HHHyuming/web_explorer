@@ -71,15 +71,15 @@ if __name__ == "__main__":
     # time.sleep(2)
     # res = jwt.decode(token,'123')
     # print(res)
-    class Li(list):
-        pass
-    li = Li()
-    a= [1,2,3]
-    li.next =a
-    print(li.next)
-    li.next.clear()
-
-    v = [1]
-    if v and isinstance(v, list):
-        print('-------------')
+    # class Li(list):
+    #     pass
+    # li = Li()
+    # a= [1,2,3]
+    # li.next =a
+    # print(li.next)
+    # li.next.clear()
+    #
+    # v = [1]
+    # if v and isinstance(v, list):
+    #     print('-------------')
     # print(li.pop())

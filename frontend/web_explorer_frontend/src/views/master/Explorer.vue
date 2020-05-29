@@ -6,18 +6,20 @@
       <el-col :span="20">
         <el-button type="primary" size="small" @click="add_file_dialog = true">新增文件夹</el-button>
         <el-button size="small" :disabled="edit_disabled" ref="edit_file_node">编辑文件夹</el-button>
-        <el-button type="danger" size="mini">删除</el-button>
+        <el-button type="danger" size="mini" @click="delete_file">删除</el-button>
         <el-button  size="small" @click="up_load_file_dialog = true">上传文件</el-button>
-        <el-dropdown>
+
+        <el-dropdown @command="drop_down_command">
           <el-button type="primary" size="small">
             更多操作<i class="el-icon-arrow-down el-icon--right"></i>
           </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>移动</el-dropdown-item>
-            <el-dropdown-item>下载</el-dropdown-item>
-            <el-dropdown-item>权限</el-dropdown-item>
+          <el-dropdown-menu slot="dropdown" >
+            <el-dropdown-item command="a">移动</el-dropdown-item>
+            <el-dropdown-item command="b">下载</el-dropdown-item>
+            <el-dropdown-item command="c">权限</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+
       </el-col>
       <el-col :span="4" align="right" >
         <i class="iconfont icon-qiehuan" style="font-size: 20px;color: deepskyblue"></i>
@@ -59,25 +61,57 @@
       :data="tableData"
       tooltip-effect="dark"
       style="width: 100%"
+      border
       @selection-change="handleSelectionChange">
       <el-table-column
         type="selection"
         width="55">
       </el-table-column>
       <el-table-column
-        label="日期"
-        width="120">
-        <template slot-scope="scope">{{ scope.row.date }}</template>
+        label="序号"
+        width="120"
+      prop="no">
+<!--        <template slot-scope="scope">{{ scope.row.date }}</template>-->
       </el-table-column>
       <el-table-column
-        prop="name"
-        label="姓名"
-        width="120">
-      </el-table-column>
-      <el-table-column
-        prop="address"
-        label="地址"
+        prop="file_name"
+        label="名称"
+        width="120"
+
         show-overflow-tooltip>
+      </el-table-column>
+      <el-table-column
+        prop="update_time"
+        label="修改日期"
+        >
+      </el-table-column>
+
+      <el-table-column
+        prop="file_type"
+        label="类型"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="file_size"
+        label="大小"
+      >
+        <template slot-scope="scope">{{scope.row.file_size | size_convert}}</template>
+      </el-table-column>
+      <el-table-column
+        prop="create_time"
+        label="创建日期"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="author_name"
+        label="作者"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="desc_content"
+        label="描述"
+        show-overflow-tooltip
+      >
       </el-table-column>
     </el-table>
 
@@ -121,7 +155,7 @@
           placeholder="请输入内容"
           v-model="add_file_form_data.desc"></el-input>
       </el-form-item>
-      <el-button type="primary" :loading="loading" @click="submit_add_file">提 交</el-button>
+      <el-button type="primary"  @click="submit_add_file">提 交</el-button>
       <el-button @click="add_file_dialog = false">取 消</el-button>
 
     </el-form>
@@ -142,23 +176,37 @@
       <div slot="header" >
         <span>上传文件</span>
       </div>
-      <el-form :model="up_load_file_dialog" label-position="top">
+      <el-form :model="up_load_form_data" label-position="top">
         <el-form-item label="文件路径">
-          <el-input v-model="up_load_file_dialog.file_path"></el-input>
+
+          <div class="block">
+            <el-cascader
+              v-model="up_load_form_data.file_path"
+              :options="this.$store.state.cascade_dir"
+              @change="handleChangePath"></el-cascader>
+          </div>
+
         </el-form-item>
 
         <el-form-item label="导入文件">
           <el-upload
             class="upload-demo"
+            ref="upload"
             drag
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="http://127.0.0.1:5000/explorer/upload_file"
             multiple
+            :auto-upload="false"
+            :headers="upload_headers"
+            :file-list="upload_file_list"
+            :on-change="upload_change"
+            :on-remove="upload_remove"
+            :data="{path:multipleSelection}"
           >
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
           </el-upload>
         </el-form-item>
-        <el-button type="primary" :loading="loading">提 交</el-button>
+        <el-button type="primary" :loading="loading" @click="upload_file">提 交</el-button>
         <el-button @click="up_load_file_dialog = false">取 消</el-button>
       </el-form>
     </el-card>
@@ -169,7 +217,9 @@
 </template>
 
 <script>
-  import {get_usr_dir_cascade, add_file} from "@/http/explorer";
+  import {get_usr_dir_cascade, add_file, index_data,
+    delete_file, upload_file, download_file
+  } from "@/http/explorer";
 
   export default {
       name: "explorer",
@@ -178,95 +228,147 @@
           filter_select_value:[],
           add_file_value:[],
           filter_value:[],
-          up_load_form_data:{},
+
+          upload_file_list:[],
+          upload_headers:{Authorization: ''},
+          up_load_form_data:{file_path:''},
           up_load_file_dialog: false,
           loading:false,
-          add_file_form_data:{file_path:'',
-          file_name:'',desc:''},
+
+          add_file_form_data:
+            {file_path:'', file_name:'',desc:''},
           add_file_dialog:false,
+
           edit_disabled: true,
-          value:null,
-          options:null,
-          login_form:{},
-          register_form:{},
-          path_options:[
 
-          ],
+          change_path:null,
 
-          tableData: [{
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-08',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-06',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-07',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }],
+          tableData: [],
           multipleSelection: []
         }
         },
 
       methods: {
-        toggleSelection(rows) {
-          if (rows) {
-            rows.forEach(row => {
-              this.$refs.multipleTable.toggleRowSelection(row);
-            });
-          } else {
-            this.$refs.multipleTable.clearSelection();
-          }
+        upload_remove(file, fileList){
+          this.upload_file_list = fileList
+        },
+        upload_change(file, fileList){
+          this.upload_file_list = fileList
         },
         handleSelectionChange(val) {
-          console.log(val)
+          // table 选中条目
+          // console.log(val);
           this.multipleSelection = val;
         },
         filter_select_handler(val){
+          // 过滤条
+          // console.log(val)
           this.filter_select_value = val;
         },
         handleChangePath(cascade_path){
-          console.log(cascade_path)
+          // console.log(cascade_path)
+          this.change_path = cascade_path
 
         },
         submit_add_file() {
         //  新增文件夹
-          this.add_file_form_data.file_path = this.add_file_value
-          const file_path = this.add_file_form_data.file_path
-          const file_name = this.add_file_form_data.file_name
-          const desc = this.add_file_form_data.desc
-          add_file(file_path, file_name, desc).then( response =>{
-
-          }).catch( error =>{
-            console.log(error)
+          this.add_file_form_data.file_path = this.add_file_value;
+          const file_path = this.add_file_form_data.file_path;
+          const file_name = this.add_file_form_data.file_name;
+          const desc = this.add_file_form_data.desc;
+          console.log(file_path)
+          add_file(file_path, file_name, desc).then( result => {
+            this.get_index_data()
+          }).catch(reason => {
+            console.log(reason)
           })
+
         },
         get_cascade_data(){
+          // 获取选项卡级联数据
           const user_name = window.sessionStorage.getItem('user_name')
           get_usr_dir_cascade(user_name).then( result => {
             const data = result.data
-
             this.$store.commit('change_cascade', data.data)
+
+
           }).catch( error => {
             console.log(error)
+          })
+        },
+        get_index_data(){
+          index_data().then( result => {
+            console.log(result)
+            if (result.data.code !== 200){
+              this.$message.error(result.data.msg)
+            }
+            else{
+              let response_data = result.data.data;
+              for (let index in response_data){
+                response_data[index]['no'] = parseInt(index) + 1
+              }
+              this.tableData = response_data
+              console.log(this.tableData)
+            }
+
+          }).catch( reason => {
+            console.log(reason)
+          })
+          this.get_cascade_data()
+        },
+        delete_file(){
+          let delete_list = this.multipleSelection;
+          if(delete_file.length === 0){
+            return
+          }
+          delete_file(delete_list).then( result => {
+
+            if (result.data.code !== 200){
+              console.log(result);
+            }
+            this.get_index_data()
+          }).catch( reason => {
+            console.log(reason)
+          })
+
+        },
+
+        upload_file(){
+
+          this.upload_headers.Authorization = window.sessionStorage.getItem('token');
+          if(this.upload_headers.Authorization){
+
+            let formData = new FormData();
+            // console.log(this.upload_file_list);
+
+            this.upload_file_list.forEach( file =>{
+              formData.append('file', file.raw)
+            });
+
+            formData.append('path',this.change_path);
+            upload_file(formData).then( result => {
+              console.log(result)
+            }).catch(reason => {
+              console.log(reason)
+            })
+          }
+          else{
+            console.log('上传失败')
+          }
+
+        },
+        drop_down_command(command){
+          console.log('xxxxxxx');
+          if(command === 'b'){
+            this.download_file()
+          }
+        },
+        download_file(){
+
+          download_file(this.multipleSelection).then( result => {
+            console.log(result)
+          }).catch( reason => {
+            console.log(reason)
           })
         },
       },
@@ -274,14 +376,20 @@
       mounted() {
 
       //  获取首页数据
-      //  获取级联目录
+        this.get_index_data();
+      //  获取级联目录 // 过滤搜索
         this.get_cascade_data()
-        // 过滤搜索
 
       },
       watch: {
 
       },
+    filters:{
+        size_convert(size){
+          let actual_size = parseInt(size) / 1024;
+          return actual_size + 'KB'
+        }
+    }
     }
 </script>
 

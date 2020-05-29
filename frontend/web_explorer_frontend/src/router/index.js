@@ -40,8 +40,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from ,next) => {
-  window.sessionStorage.getItem("token");
-  console.log('before each', window.sessionStorage)
+
   if (to.path.indexOf("explorer") >= 0){
     if (window.sessionStorage.getItem("token")){
       next()

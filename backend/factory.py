@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, current_app
 from flask_cors import CORS
 
 import config
@@ -13,6 +13,8 @@ def create_app(env):
         app.config.from_object(config.config_map['development'])
     if env == 'production':
         app.config.from_object(config.config_map['production'])
+
+    # load redis-api
 
     # load api
     app.register_blueprint(blue_user_action)

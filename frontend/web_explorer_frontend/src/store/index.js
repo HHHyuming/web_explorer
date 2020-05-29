@@ -11,7 +11,7 @@ const store = new vuex.Store({
     change_cascade(state,target_data){
       state.cascade_dir = []
       state.cascade_dir.push(...target_data)
-      console.log(state)
+      // console.log(state)
     }
   }
 })
