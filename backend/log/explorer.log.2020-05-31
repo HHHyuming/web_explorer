@@ -1,0 +1,126 @@
+2020-05-31 20:12:34 - explorer.py:49 - ERROR - 18904 - 7816 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:12:34 - explorer.py:49 - ERROR - 18904 - 16712 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:14:23 - explorer.py:49 - ERROR - 18904 - 15628 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:14:23 - explorer.py:49 - ERROR - 18904 - 15904 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:15:05 - explorer.py:49 - ERROR - 18904 - 9548 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:15:05 - explorer.py:49 - ERROR - 18904 - 5360 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:20:21 - explorer.py:49 - ERROR - 18904 - 7208 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:20:21 - explorer.py:49 - ERROR - 18904 - 19056 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:03 - explorer.py:49 - ERROR - 18904 - 16504 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:03 - explorer.py:49 - ERROR - 18904 - 17448 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:06 - explorer.py:49 - ERROR - 18904 - 8180 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:08 - explorer.py:49 - ERROR - 18904 - 10860 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:21:08 - explorer.py:49 - ERROR - 18904 - 2656 - execute() first
+2020-05-31 20:21:09 - explorer.py:49 - ERROR - 18904 - 7012 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:09 - explorer.py:49 - ERROR - 18904 - 11840 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:09 - explorer.py:49 - ERROR - 18904 - 19184 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:09 - explorer.py:49 - ERROR - 18904 - 4412 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:09 - explorer.py:49 - ERROR - 18904 - 7104 - execute() first
+2020-05-31 20:21:09 - explorer.py:49 - ERROR - 18904 - 18468 - Cursor closed
+2020-05-31 20:21:10 - explorer.py:49 - ERROR - 18904 - 14668 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:12 - explorer.py:49 - ERROR - 18904 - 6628 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:12 - explorer.py:49 - ERROR - 18904 - 9988 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:12 - explorer.py:49 - ERROR - 18904 - 19056 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:12 - explorer.py:49 - ERROR - 18904 - 18740 - execute() first
+2020-05-31 20:21:12 - explorer.py:49 - ERROR - 18904 - 5824 - Cursor closed
+2020-05-31 20:21:13 - explorer.py:49 - ERROR - 18904 - 2844 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:15 - explorer.py:49 - ERROR - 18904 - 2712 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:15 - explorer.py:49 - ERROR - 18904 - 10252 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:15 - explorer.py:49 - ERROR - 18904 - 13040 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:21:15 - explorer.py:49 - ERROR - 18904 - 18908 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:30 - explorer.py:49 - ERROR - 18904 - 10752 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:30 - explorer.py:49 - ERROR - 18904 - 18684 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:30 - explorer.py:49 - ERROR - 18904 - 17848 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:31 - explorer.py:49 - ERROR - 18904 - 17276 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:31 - explorer.py:49 - ERROR - 18904 - 17216 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:21:58 - explorer.py:49 - ERROR - 18904 - 4360 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:58 - explorer.py:49 - ERROR - 18904 - 19116 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:58 - explorer.py:49 - ERROR - 18904 - 19208 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:21:59 - explorer.py:49 - ERROR - 18904 - 4512 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:22:41 - explorer.py:49 - ERROR - 18904 - 4412 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:22:41 - explorer.py:49 - ERROR - 18904 - 14668 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:22:41 - explorer.py:49 - ERROR - 18904 - 18468 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:22:42 - explorer.py:49 - ERROR - 18904 - 7104 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:22:43 - explorer.py:49 - ERROR - 18904 - 10860 - list index out of range
+2020-05-31 20:23:13 - explorer.py:49 - ERROR - 18904 - 10336 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:23:13 - explorer.py:49 - ERROR - 18904 - 2368 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:23:13 - explorer.py:49 - ERROR - 18904 - 4016 - 'NoneType' object has no attribute 'encode'
+2020-05-31 20:23:14 - explorer.py:49 - ERROR - 18904 - 10440 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:23:14 - explorer.py:49 - ERROR - 18904 - 1912 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:33:51 - explorer.py:51 - ERROR - 4508 - 4444 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:33:51 - explorer.py:51 - ERROR - 4508 - 18420 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:34:27 - explorer.py:51 - ERROR - 4508 - 7012 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:34:37 - explorer.py:51 - ERROR - 4508 - 9728 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:34:37 - explorer.py:51 - ERROR - 4508 - 16256 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:35:22 - explorer.py:51 - ERROR - 4508 - 3540 - execute() first
+2020-05-31 20:35:42 - explorer.py:51 - ERROR - 4508 - 10300 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:35:52 - explorer.py:51 - ERROR - 4508 - 9868 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:36:09 - explorer.py:51 - ERROR - 4508 - 18008 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:36:10 - explorer.py:51 - ERROR - 4508 - 9924 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:36:10 - explorer.py:51 - ERROR - 4508 - 12960 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:36:18 - explorer.py:51 - ERROR - 4508 - 17204 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:36:18 - explorer.py:51 - ERROR - 4508 - 18012 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:36:32 - explorer.py:51 - ERROR - 4508 - 15028 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:36:33 - explorer.py:51 - ERROR - 4508 - 17368 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:36:44 - explorer.py:51 - ERROR - 4508 - 3600 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:42:50 - explorer.py:51 - ERROR - 5360 - 3016 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:42:53 - explorer.py:51 - ERROR - 5360 - 14440 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:42:58 - explorer.py:51 - ERROR - 5360 - 18468 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:42:58 - explorer.py:51 - ERROR - 5360 - 8120 - list index out of range
+2020-05-31 20:43:00 - explorer.py:51 - ERROR - 5360 - 4868 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:43:00 - explorer.py:51 - ERROR - 5360 - 2368 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:43:03 - explorer.py:51 - ERROR - 5360 - 656 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:43:03 - explorer.py:51 - ERROR - 5360 - 8484 - list index out of range
+2020-05-31 20:43:05 - explorer.py:51 - ERROR - 5360 - 19060 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:43:09 - explorer.py:51 - ERROR - 5360 - 3816 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:43:09 - explorer.py:51 - ERROR - 5360 - 3484 - list index out of range
+2020-05-31 20:43:12 - explorer.py:51 - ERROR - 5360 - 14744 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:43:12 - explorer.py:51 - ERROR - 5360 - 17864 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:43:14 - explorer.py:51 - ERROR - 5360 - 19248 - tuple index out of range
+2020-05-31 20:52:17 - explorer.py:52 - ERROR - 8992 - 17032 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:52:17 - explorer.py:52 - ERROR - 8992 - 824 - list index out of range
+2020-05-31 20:52:56 - explorer.py:52 - ERROR - 8992 - 1448 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:54:21 - explorer.py:52 - ERROR - 8992 - 13136 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:54:21 - explorer.py:52 - ERROR - 8992 - 3568 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:56:24 - explorer.py:52 - ERROR - 8992 - 18012 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:56:30 - explorer.py:52 - ERROR - 8992 - 13692 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:56:30 - explorer.py:52 - ERROR - 8992 - 7200 - list index out of range
+2020-05-31 20:56:40 - explorer.py:52 - ERROR - 8992 - 17184 - execute() first
+2020-05-31 20:56:40 - explorer.py:52 - ERROR - 8992 - 12320 - Cursor closed
+2020-05-31 20:57:09 - explorer.py:52 - ERROR - 8992 - 18468 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:20 - explorer.py:52 - ERROR - 8992 - 2656 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:20 - explorer.py:52 - ERROR - 8992 - 4348 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:24 - explorer.py:52 - ERROR - 8992 - 4200 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:24 - explorer.py:52 - ERROR - 8992 - 19040 - execute() first
+2020-05-31 20:57:24 - explorer.py:52 - ERROR - 8992 - 10132 - Cursor closed
+2020-05-31 20:57:26 - explorer.py:52 - ERROR - 8992 - 10736 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:31 - explorer.py:52 - ERROR - 8992 - 16256 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:31 - explorer.py:52 - ERROR - 8992 - 2276 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:57:31 - explorer.py:52 - ERROR - 8992 - 17200 - execute() first
+2020-05-31 20:57:46 - explorer.py:52 - ERROR - 8992 - 18012 - list index out of range
+2020-05-31 20:58:13 - explorer.py:52 - ERROR - 8992 - 17740 - execute() first
+2020-05-31 20:58:16 - explorer.py:52 - ERROR - 8992 - 11256 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:16 - explorer.py:52 - ERROR - 8992 - 18968 - list index out of range
+2020-05-31 20:58:19 - explorer.py:52 - ERROR - 8992 - 16068 - Cursor closed
+2020-05-31 20:58:19 - explorer.py:52 - ERROR - 8992 - 14556 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:19 - explorer.py:52 - ERROR - 8992 - 18636 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:21 - explorer.py:52 - ERROR - 8992 - 17184 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:21 - explorer.py:52 - ERROR - 8992 - 17200 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:58:21 - explorer.py:52 - ERROR - 8992 - 16868 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:58:23 - explorer.py:52 - ERROR - 8992 - 6244 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:23 - explorer.py:52 - ERROR - 8992 - 7832 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:58:23 - explorer.py:52 - ERROR - 8992 - 18368 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 20:58:25 - explorer.py:52 - ERROR - 8992 - 16992 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:25 - explorer.py:52 - ERROR - 8992 - 18396 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:42 - explorer.py:52 - ERROR - 8992 - 19184 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:42 - explorer.py:52 - ERROR - 8992 - 3500 - execute() first
+2020-05-31 20:58:45 - explorer.py:52 - ERROR - 8992 - 816 - 'NoneType' object has no attribute 'read'
+2020-05-31 20:58:45 - explorer.py:52 - ERROR - 8992 - 18828 - execute() first
+2020-05-31 21:00:24 - explorer.py:52 - ERROR - 8992 - 14548 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 21:07:39 - explorer.py:52 - ERROR - 8992 - 19976 - execute() first
+2020-05-31 21:07:39 - explorer.py:52 - ERROR - 8992 - 19992 - 'NoneType' object has no attribute 'read'
+2020-05-31 21:07:49 - explorer.py:52 - ERROR - 8992 - 17252 - 'NoneType' object has no attribute 'read'
+2020-05-31 21:07:49 - explorer.py:52 - ERROR - 8992 - 9044 - execute() first
+2020-05-31 21:07:56 - explorer.py:52 - ERROR - 8992 - 16704 - unpack_from requires a buffer of at least 8 bytes
+2020-05-31 21:07:56 - explorer.py:52 - ERROR - 8992 - 19632 - Cursor closed
+2020-05-31 21:07:56 - explorer.py:52 - ERROR - 8992 - 20464 - execute() first
