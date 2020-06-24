@@ -1,13 +1,12 @@
-import copy
-import os, platform
-import time
+import os
+import platform
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 from io import BytesIO
 import zipfile
 
 from werkzeug.utils import secure_filename
-from flask import Blueprint, request, g, send_from_directory, send_file, make_response, Response
+from flask import Blueprint, request, g, send_file, make_response, Response
 
 import config
 from common.Loghandler import MyLogger
@@ -15,7 +14,7 @@ from common.MyResponse import MyResponse
 from utils.common_fun import decode_jwt
 from api.logic import get_cascade_path
 from api import logic
-from config import db_connection_list, USER_HOME_DIR, SECRET_KEY
+from config import db_connection_list, USER_HOME_DIR
 
 
 explorer_db = db_connection_list['explorer']
@@ -99,10 +98,10 @@ def create_folder():
         db_path = f'{g.user}'
         file_list.append(file_name)
     else:
-        db_path = f'{g.user}\\{file_name}'
+        db_path = f'{g.user}{config.SPLICER}{file_name}'
     for path in file_list:
         base_path = os.path.join(base_path, path)
-        db_path += f'\\{path}'
+        db_path += f'{config.SPLICER}{path}'
     # 创建目录或文件
 
 
@@ -130,7 +129,7 @@ def create_folder():
         desc_content = desc
         user_id = g.user_id
         current_path = db_path
-        level = len(db_path.split('\\')) - 1
+        level = len(db_path.split(config.SPLICER)) - 1
         data.append(update_time)
         data.append(file_type)
         data.append(file_size)
@@ -225,7 +224,7 @@ def upload_file():
         file_type = file_name.rsplit('.')[-1]
         if file_type == file_name:
             file_name = single_file.filename.rsplit('.')[0]
-        level = len(db_path.split('\\'))
+        level = len(db_path.split(config.SPLICER))
         # 文件名
         real_name = datetime.now().strftime('%Y%m%d%H%M') + str(uuid.uuid4()) + '.' + file_type
         # print(file_name, real_name)
@@ -407,18 +406,6 @@ def new_cascade_path():
             i.pop('path')
     # print(data)
     return MyResponse(data=data).response_data
-
-
-@blue_explorer.route('/level_path')
-def get_level_path(path):
-
-    "condition path=path or level=len(path)-1"
-    "name path "
-    condition_path = '\\'.join(path)
-    path_level = len(path) - 1
-    def query_data():
-
-        pass
 
 
 @blue_explorer.route('/change_directory', methods=['POST','GET'])
